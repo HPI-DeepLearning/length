@@ -48,7 +48,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser("Train a simple neural network")
     parser.add_argument("--num-epochs", type=int, default=10, help="Number of epochs")
     parser.add_argument("--batch-size", type=int, default=64, help="Batch size")
-    parser.add_argument("--optimizer", choices=["adam", "sgd"], default="adam", help="Optimizer to use")
+    parser.add_argument("--optimizer", choices=["adam", "sgd"], default="sgd", help="Optimizer to use")
     parser.add_argument("--data-set", choices=["mnist", "fashion"], default="mnist", help="Which data set to train for")
     parser.add_argument("--learning-rate", type=float, default=0.001, help="(Initial) learning rate")
     parser.add_argument("--train-verbosity", type=int, default=50,
