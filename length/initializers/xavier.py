@@ -15,4 +15,4 @@ class Xavier(Initializer):
 
     def __call__(self, array):
         # TODO: overwrite values in array with a correctly initialized one
-        array[...] = np.zeros_like(array)
+        array[...] = np.random.normal(loc=0.0, scale=1e-2, size=array.shape)
