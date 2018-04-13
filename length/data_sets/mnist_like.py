@@ -89,8 +89,9 @@ class MNISTLike(DataSet):
                     # TODO: adapt the numpy array, so it has a number of dimensions equal to 1 + self.sample_dimensions
 
                     if self.scale is not None:
+                        # convert data to internally used dtype (float)
+                        data = data.astype(DTYPE)
                         # TODO: scale data to values between zero and self.scale
-                        pass
 
                 # set loaded data
                 setattr(self, target, data)
