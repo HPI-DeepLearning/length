@@ -1,5 +1,7 @@
 # LENGTH - Lightning-fast Extensible Neural-network Guarding The HPI
 
+![logo](logo.gif)
+
 A simple neural network implementation that could be used for education.
 But beware! Some important parts of the code are missing :wink: and you
 have to fill the blanks!
