@@ -78,20 +78,37 @@ class MNISTLike(DataSet):
             with gzip.open(file_path) as handle:
                 # see IDX file format specification:
                 # http://yann.lecun.com/exdb/mnist/
+                dtypes = {
+                    "08": np.uint8,
+                    "09": np.int8,
+                    "0B": np.int16,
+                    "0C": np.int32,
+                    "0D": np.float32,
+                    "0E": np.float64,
+                }
 
-                # TODO: read magic number/dimensions from handle
+                magic_num = handle.read(4).hex()
+                assert "0000" == magic_num[:4]
+                dtype = dtypes[magic_num[4:6]]
+                num_dim = int(magic_num[6:8], 16)
 
-                # TODO: read rest of raw data from handle into a numpy array
-                data = None
+                dimensions = [int(handle.read(4).hex(), 16) for _ in range(num_dim)]
+
+                data = np.fromstring(handle.read(), dtype=dtype)
 
                 if "images" in target:
                     # only do this if we are reading an image file
-                    # TODO: adapt the numpy array, so it has a number of dimensions equal to 1 + self.sample_dimensions
+                    shape = dimensions
+                    if num_dim > 1 + self.sample_dimensions:
+                        shape = [dimensions[0]] + [np.prod(dimensions[1:])]
+                    elif num_dim < 1 + self.sample_dimensions:
+                        shape = [dimensions[0]] + [1] + dimensions[1:]
+
+                    data = data.reshape(shape)
 
                     if self.scale is not None:
                         # convert data to internally used dtype (float)
-                        data = data.astype(DTYPE)
-                        # TODO: scale data to values between zero and self.scale
+                        data = data.astype(DTYPE) / 255 * self.scale
 
                 # set loaded data
                 setattr(self, target, data)

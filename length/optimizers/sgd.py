@@ -12,7 +12,5 @@ class SGD(Optimizer):
         self.lr = lr
 
     def run_update_rule(self, gradients, _):
-        # TODO: implement SGD update rule
-        # HINT: it should not be more than one line ;)
-        param_deltas = None
+        param_deltas = [self.lr * gradient for gradient in gradients]
         return param_deltas
