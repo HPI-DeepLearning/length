@@ -1,6 +1,6 @@
 # LENGTH - Lightning-fast Extensible Neural-network Guarding The HPI
 
-![logo](logo.gif)
+![logo](https://github.com/HPI-DeepLearning/length/raw/master/logo.gif)
 
 A simple neural network implementation that could be used for education.
 But beware! Some important parts of the code are missing :wink: and you
